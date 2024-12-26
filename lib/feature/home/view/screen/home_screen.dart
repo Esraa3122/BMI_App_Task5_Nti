@@ -36,12 +36,12 @@ class _MyScreenState extends State<MyHomePage> {
     weightController.dispose();
   }
 
-    void calculateW() {
+  void calculateW() {
     double? weight = double.tryParse(weightController.text);
     double? length = double.tryParse(heightController.text);
     double lengthInMeters = length! / 100;
     double count = weight! / (lengthInMeters * lengthInMeters);
-   String status;
+    String status;
 
     if (count < 18.5) {
       status = 'نحيف';
@@ -53,7 +53,7 @@ class _MyScreenState extends State<MyHomePage> {
       status = 'سمين';
     }
 
-      setState(() {
+    setState(() {
       result = 'القيمة: ${count.toStringAsFixed(2)}\n الحاله: $status';
     });
   }
@@ -70,7 +70,8 @@ class _MyScreenState extends State<MyHomePage> {
             Column(
               children: [
                 const Image(
-                  image: AssetImage("images/undraw_login_wqkt.png"),height: 300,
+                  image: AssetImage("images/undraw_login_wqkt.png"),
+                  height: 300,
                 ),
                 const SizedBox(
                   height: 40,
@@ -80,22 +81,25 @@ class _MyScreenState extends State<MyHomePage> {
                     text: 'احسب',
                     onPressed: () {
                       if (formKey.currentState!.validate()) {
-                      calculateW();
-                    } else {
-                      print('غير متوفر');
-                    }
+                        formKey.currentState!.save();
+                        calculateW();
+                      } else {
+                        print('غير متوفر');
+                      }
                     }),
-                    const SizedBox(height: 20,),
-                    // Text(result),
-                      Text(
+                const SizedBox(
+                  height: 20,
+                ),
+                // Text(result),
+                Text(
                   'النتيجه:',
                   style: Theme.of(context).textTheme.headlineMedium,
                 ),
                 Text(
-                 result,
-                  style: Theme.of(context).textTheme.bodyLarge,
+                  result,
+                  style: Theme.of(context).textTheme.headlineSmall,
                 ),
-                 const SizedBox(
+                const SizedBox(
                   height: 20,
                 ),
               ],
